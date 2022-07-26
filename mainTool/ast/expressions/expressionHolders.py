@@ -1,5 +1,5 @@
 from mainTool.ast.expressions.expression import Expression
-from mainTool.ast import astNode
+from mainTool.ast.astNode import ASTNode
 from mainTool.ast.walking.visitor import ASTNodeVisitor
 
 
@@ -52,7 +52,7 @@ class ThrowExpression(ExpressionHolder):
     def getThrowExpression(self):
         return self.throwExpression
 
-    def addChild(self, node: astNode):
+    def addChild(self, node: ASTNode):
         if isinstance(node, Expression):
             self.throwExpression = node
         super().addChild(node)

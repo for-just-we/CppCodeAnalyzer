@@ -11,6 +11,8 @@ from mainTool.ast.statements.blockStarters import *
 from mainTool.ast.statements.jumps import *
 from mainTool.ast.statements.statements import *
 
+from mainTool.ast.declarations.simpleDecls import IdentifierDecl
+
 from mainTool.ast.expressions.expression import *
 from mainTool.ast.expressions.primaryExpressions import *
 from mainTool.ast.expressions.expressionHolders import *
@@ -29,7 +31,7 @@ class NestingReconstructor(object):
     def __init__(self, stack: List[ASTNode]):
         self.stack: List[ASTNode] = stack
 
-    def addItemToParent(self, expression: astNode):
+    def addItemToParent(self, expression: ASTNode):
         topOfStack: ASTNode = self.stack[-1]
         topOfStack.addChild(expression)
 

@@ -1,5 +1,5 @@
 from typing import Dict
-from mainTool.ast import astNode
+from mainTool.ast.astNode import ASTNode
 
 class CFGNode(object):
     def __str__(self) -> str:
@@ -14,8 +14,8 @@ class CFGNode(object):
 
 # 普通CFG结点
 class ASTNodeContainer(CFGNode):
-    def __init__(self, node: astNode):
-        self.astNode: astNode = node
+    def __init__(self, node: ASTNode):
+        self.astNode: ASTNode = node
         self.astNode.markAsCFGNode()
 
     def getEscapedCodeStr(self):

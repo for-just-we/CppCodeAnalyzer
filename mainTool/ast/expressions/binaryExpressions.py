@@ -1,5 +1,5 @@
 from mainTool.ast.expressions.expression import Expression
-from mainTool.ast import astNode
+from mainTool.ast.astNode import ASTNode
 from antlr4.ParserRuleContext import ParserRuleContext
 from typing import List
 
@@ -23,7 +23,7 @@ class BinaryExpression(Expression):
     def setRight(self, right: Expression):
         self.subExpressions[1] = right
 
-    def addChild(self, item: astNode):
+    def addChild(self, item: ASTNode):
         if not isinstance(item, Expression):
             raise RuntimeError("Error: child of BinaryExpression should be Expression")
         if self.getLeft() is None:

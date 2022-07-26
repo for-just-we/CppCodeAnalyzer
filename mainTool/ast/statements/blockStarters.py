@@ -1,6 +1,7 @@
-from mainTool.ast.statements.statements import *
-from mainTool.ast.declarations.simpleDecls import *
+from mainTool.ast.statements.statements import Statement
+from mainTool.ast.declarations.simpleDecls import IdentifierDeclType, ForInit, ForRangeInit
 from mainTool.ast.expressions.expressionHolders import Condition
+from mainTool.ast.expressions.expression import Expression, Identifier
 from mainTool.ast.walking.visitor import ASTNodeVisitor
 
 from typing import List

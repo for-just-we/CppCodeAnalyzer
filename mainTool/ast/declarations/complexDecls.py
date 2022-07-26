@@ -1,6 +1,8 @@
-from mainTool.ast.statements.statements import *
-from mainTool.ast.expressions.primaryExpressions import *
-from mainTool.ast.expressions.expression import *
+from mainTool.ast.statements.statements import Statement, CompoundStatement
+from mainTool.ast.expressions.primaryExpressions import PrimaryExpression
+from mainTool.ast.expressions.expression import Identifier
+from mainTool.ast.astNode import ASTNode
+from mainTool.ast.walking.visitor import ASTNodeVisitor
 
 from typing import List
 from mainTool.utils.types import ClassType
