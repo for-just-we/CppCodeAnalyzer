@@ -9,7 +9,7 @@ from mainTool.antlr.CPP14Lexer import CPP14Lexer, InputStream, CommonTokenStream
 from mainTool.ast.builders import *
 
 from antlr4.tree.Tree import ParseTree, ParseTreeWalker
-
+from time import time
 walker: ParseTreeWalker = ParseTreeWalker()
 
 
@@ -94,6 +94,7 @@ code2 = "void CWE122_Heap_Based_Buffer_Overflow__c_CWE805_char_memmove_04_bad(){
 
 
 def test():
+    startTime = time()
     # AST
     parser: CPP14Parser = getParser(code)
     tree: ParseTree = parser.functiondefinition()
@@ -117,6 +118,9 @@ def test():
     ddgCreator: DDGCreator = DDGCreator()
     ddg: DDG = ddgCreator.createForDefUseCFG(defUseCFG)
 
+    endTime = time()
+
+    print(endTime - startTime)
     for edge in ddg.defUseEdges:
         print(f"{str(edge.src)} ----[{edge.symbol}] ----- {str(edge.dst)}")
     return

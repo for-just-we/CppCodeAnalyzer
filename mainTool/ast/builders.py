@@ -738,15 +738,18 @@ class FunctionContentBuilder(CPP14Listener):
         elif node_type in { CPP14Parser.PlusPlus, CPP14Parser.MinusMinus }:
             incDec: IncDec = IncDec()
             incDec.operator = node_impl.getText()
+            incDec.codeStr = node_impl.getText()
             # ++x / --x
             if isinstance(parent, UnaryOp):
                 incDecOp: IncDecOp = IncDecOp()
                 incDecOp.isPost = False
+                incDecOp.operator = node_impl.getText()
                 incDecOp.addChild(incDec)
                 self.stack[-1] = incDecOp
 
             # x++ / x--
             elif isinstance(parent, IncDecOp):
+                parent.operator = incDec.operator
                 parent.addChild(incDec)
 
 # 这个类用来解析函数返回基础类型
@@ -1012,7 +1015,8 @@ def astNodeToJson(astNode: ASTNode) -> Dict:
     while len(queue) > 0:
         parentIdx, node = queue.pop(0)
         childNumber: int = node.getChildCount()
-        contents.append([node.getTypeAsString(), node.getEscapedCodeStr()])
+        operator: str = node.operator if isinstance(node, Expression) else ""
+        contents.append([node.getTypeAsString(), node.getEscapedCodeStr(), operator])
         if parentIdx != -1:
             astEdges.append([parentIdx, idx])
         for i in range(childNumber):
@@ -1047,13 +1051,18 @@ def unserializeNode(data: Dict) -> Dict:
 def json2astNode(data: dict) -> ASTNode:
     types = list(map(lambda content: content[0], data["contents"]))
     tokenSeqs = list(map(lambda content: content[1], data["contents"]))
+    operators = list(map(lambda content: content[2], data["contents"]))
     nodes: List[ASTNode] = [getInstanceFromTypeName(type) for type in types]
 
-    for node, tokenSeq in zip(nodes, tokenSeqs):
+    for node, tokenSeq, operator in zip(nodes, tokenSeqs, operators):
         node.codeStr = tokenSeq
+        if isinstance(node, Expression):
+            node.operator = operator
+
     location: CodeLocation = CodeLocation()
     location.startLine = data["line"]
     nodes[0].location = location
+
 
     for edge in data["edges"]:
         nodes[edge[0]].addChild(nodes[edge[1]])
