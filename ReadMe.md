@@ -48,6 +48,12 @@ If you want more details, coule refer to [Joern工具工作流程分析](https:/
 
 The testfile in directionary `test/mainToolTests` illustrated the progress of each module, you could refer to those test cases to learn how to use API in CppCodeAnalyzer.
 
+Environment:
+
+- python 3.8
+
+- antlr4-python3-runtime 4.9.2
+
 
 # Our motivations
 
