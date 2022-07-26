@@ -181,13 +181,13 @@
       "wcsftime": [0, 2]
   },
   "ArgDefStartIds": {
-      "scanf": [1],
-      "fscanf": [2],
-      "fwscanf": [2],
-      "swscanf": [2],
-      "vfwscanf": [2],
-      "vswscanf": [2],
-      "vwscanf": [1],
-      "wscanf": [1]
+      "scanf": 1,
+      "fscanf": 2,
+      "fwscanf": 2,
+      "swscanf": 2,
+      "vfwscanf": 2,
+      "vswscanf": 2,
+      "vwscanf": 1,
+      "wscanf": 1
   }
 }
