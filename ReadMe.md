@@ -54,6 +54,14 @@ Environment:
 
 - antlr4-python3-runtime 4.9.2
 
+Used as python package:
+
+- Download release first and unzip
+
+- Run `python setup.py bdist_wheel` and `pip install dist/CppCodeAnalyzer-1.0-py3-none-any.whl`
+
+- After installing, when import APIs from CppCodeAnalyzer, you just need to add prefix `CppCodeAnalyzer` to the package name, for example, the import statement `from mainTool.udg.astAnalyzers import ASTDefUseAnalyzer, CalleeInfos, CFGToUDGConverter` in [CPGBuildTest.py](https://github.com/for-just-we/CppCodeAnalyzer/blob/master/test/mainToolTests/CPGBuildTest.py), you just need to modify to `from CppCodeAnalyzer.mainTool.udg.astAnalyzers import ASTDefUseAnalyzer, CalleeInfos, CFGToUDGConverter`.
+
 
 # Our motivations
 
@@ -78,6 +86,13 @@ s3: memcpy(data, source, 100);
 - However, s1 defines `* source`, s2 defines `* ( source + 99)`, a precise DDG should contains edge `s1 -> s3, s2 -> s3`
 
 Also, our tool is much more slower than Joern, normally parsing a file in SARD dataset needs 20 - 30 seconds, so we recommand dump output CPG into json format first if you need to train a model.
+
+
+
+
+
+
+
 
 
 # Extra Tools
