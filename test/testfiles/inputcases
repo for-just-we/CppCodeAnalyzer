@@ -1,0 +1,13 @@
+fscanf(stdin, "%d", &data);
+fscanf(stdin, "%u", &data);
+fscanf(stdin, "%zu", &data);
+
+recvResult = recv(connectSocket, inputBuffer, CHAR_ARRAY_SIZE - 1, 0);
+recvResult = recv(connectSocket, (char*)(data+dataLen) , sizeof(char)*(FILENAME_MAX-dataLen-1), 0);
+
+fgets(inputBuffer, CHAR_ARRAY_SIZE, stdin);
+fgets(data+dataLen, (int)(100-dataLen), stdin);
+fgets(data+dataLen, (int)(FILENAME_MAX - dataLen), stdin);
+fgetws(data+dataLen , (int)(100 - dataLen), pFile);
+
+cin >> buf;
