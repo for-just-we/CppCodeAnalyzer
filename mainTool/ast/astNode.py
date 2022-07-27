@@ -72,6 +72,7 @@ class ASTNode(object):
     def initializeFromContext(self, ctx: ParserRuleContext):
         self.parseTreeNodeContext = ctx
         self.setLocation(ctx)
+        self.codeStr = self.escapeCodeStr(childTokenString(self.parseTreeNodeContext))
 
     def setLocation(self, ctx: ParserRuleContext):
         self.location = CodeLocation(ctx)
