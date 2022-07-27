@@ -85,7 +85,7 @@ s3: memcpy(data, source, 100);
 
 - However, s1 defines `* source`, s2 defines `* ( source + 99)`, a precise DDG should contains edge `s1 -> s3, s2 -> s3`
 
-Also, our tool is much more slower than Joern, normally parsing a file in SARD dataset needs 20 - 30 seconds, so we recommand dump output CPG into json format first if you need to train a model.
+Also, our tool is much more slower than Joern, normally parsing a file in SARD dataset needs 20 - 30 seconds, so we recommand dump output CPG into json format first if you need to train a model. The Java version [CppCodeAnalyzerJava](https://github.com/for-just-we/CppCodeAnalyzerJava) is much more faster, if you prefer fast analysis you could use Java version.
 
 
 
