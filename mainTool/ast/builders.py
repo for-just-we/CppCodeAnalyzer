@@ -1053,6 +1053,8 @@ def json2astNode(data: dict) -> ASTNode:
     tokenSeqs = list(map(lambda content: content[1], data["contents"]))
     operators = list(map(lambda content: content[2], data["contents"]))
     nodes: List[ASTNode] = [getInstanceFromTypeName(type) for type in types]
+    for edge in data["edges"]:
+        nodes[edge[0]].addChild(nodes[edge[1]])
 
     for node, tokenSeq, operator in zip(nodes, tokenSeqs, operators):
         node.codeStr = tokenSeq
@@ -1062,10 +1064,6 @@ def json2astNode(data: dict) -> ASTNode:
     location: CodeLocation = CodeLocation()
     location.startLine = data["line"]
     nodes[0].location = location
-
-
-    for edge in data["edges"]:
-        nodes[edge[0]].addChild(nodes[edge[1]])
 
     return nodes[0]
 

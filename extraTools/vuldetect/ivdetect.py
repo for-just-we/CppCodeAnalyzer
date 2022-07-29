@@ -24,7 +24,6 @@ def lexical_parse(line: str) -> List[str]:
         # 按大小写分割
         else:
             new_tokens.extend(re.findall('[A-Z][a-z]*', token))
-
     return new_tokens
 
 
