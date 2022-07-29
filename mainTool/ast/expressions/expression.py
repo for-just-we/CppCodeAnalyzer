@@ -27,7 +27,7 @@ class ClassStaticIdentifier(Identifier):
         self.className: Identifier = None
         self.varName: Identifier = None
 
-    def addChild(self, node):
+    def addChild(self, node: ASTNode):
         if isinstance(node, Identifier):
             if self.className is None:
                 self.className = node

@@ -695,7 +695,7 @@ class FunctionContentBuilder(CPP14Listener):
 
         # 字面值
         elif node_type in { CPP14Parser.Integerliteral, CPP14Parser.Userdefinedintegerliteral }:
-            integerExpression: IntergerExpression = IntergerExpression()
+            integerExpression: IntegerExpression = IntegerExpression()
             integerExpression.codeStr = node_impl.getText()
             parent.addChild(integerExpression)
 
@@ -867,7 +867,7 @@ class FunctionNameParamBuilder(CPP14Listener):
 
                 # 字面值
         elif node_type in {CPP14Parser.Integerliteral, CPP14Parser.Userdefinedintegerliteral}:
-            integerExpression: IntergerExpression = IntergerExpression()
+            integerExpression: IntegerExpression = IntegerExpression()
             integerExpression.codeStr = node_impl.getText()
             parent.addChild(integerExpression)
 
@@ -1159,6 +1159,10 @@ def getInstanceFromTypeName(astType: str) -> ASTNode:
     elif astType == "ThrowExpression":
         return ThrowExpression()
 
+    elif astType == "UnaryOp":
+        return UnaryOp()
+    elif astType == "UnaryOperator":
+        return UnaryOperator()
     elif astType == "PostfixExpression":
         return PostfixExpression()
     elif astType == "IncDecOp":
@@ -1184,8 +1188,8 @@ def getInstanceFromTypeName(astType: str) -> ASTNode:
         return CharExpression()
     elif astType == "DoubleExpression":
         return DoubleExpression()
-    elif astType == "IntergerExpression":
-        return IntergerExpression()
+    elif astType == "IntegerExpression":
+        return IntegerExpression()
     elif astType == "PointerExpression":
         return PointerExpression()
     elif astType == "StringExpression":

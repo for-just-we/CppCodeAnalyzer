@@ -22,7 +22,7 @@ class DoubleExpression(PrimaryExpression):
         visitor.visit(self)
 
 # int, short, unsigned int, unsigned short, long, unsigned long类型常量
-class IntergerExpression(PrimaryExpression):
+class IntegerExpression(PrimaryExpression):
     def accept(self, visitor: ASTNodeVisitor):
         visitor.visit(self)
 
