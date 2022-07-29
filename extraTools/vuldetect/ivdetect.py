@@ -1,5 +1,6 @@
 from extraTools.vuldetect.utils.symbolized import ASTVarAnalyzer
 from mainTool.CPG import *
+import re
 
 # supproting IVDetect to extract variables and their types
 # paper: Vulnerability Detection with Fine-Grained Interpretations
@@ -17,7 +18,13 @@ def lexical_parse(line: str) -> List[str]:
     tokens = list(filter(lambda t: t not in filtered_set, tokens))
     new_tokens = list()
     for token in tokens:
-        new_tokens.extend([t for t in token.split('_') if t != ''])
+        # 按下划线分割
+        if '_' in token:
+            new_tokens.extend([t for t in token.split('_') if t != ''])
+        # 按大小写分割
+        else:
+            new_tokens.extend(re.findall('[A-Z][a-z]*', token))
+
     return new_tokens
 
 
