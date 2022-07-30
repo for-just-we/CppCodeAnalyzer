@@ -19,11 +19,7 @@ def lexical_parse(line: str) -> List[str]:
     new_tokens = list()
     for token in tokens:
         # 按下划线分割
-        if '_' in token:
-            new_tokens.extend([t for t in token.split('_') if t != ''])
-        # 按大小写分割
-        else:
-            new_tokens.extend(re.findall('[a-zA-Z][^A-Z]*', token))
+        new_tokens.extend([t for t in token.split('_') if t != ''])
     return new_tokens
 
 
