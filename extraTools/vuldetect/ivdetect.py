@@ -18,8 +18,11 @@ def lexical_parse(line: str) -> List[str]:
     tokens = list(filter(lambda t: t not in filtered_set, tokens))
     new_tokens = list()
     for token in tokens:
+        if token.isalpha():
+            new_tokens.extend(re.findall("[a-zA-Z][^A-Z]*", token))
+        else:
         # 按下划线分割
-        new_tokens.extend([t for t in token.split('_') if t != ''])
+            new_tokens.extend([t for t in token.split('_') if t != ''])
     return new_tokens
 
 
