@@ -1,6 +1,6 @@
 # About CppCodeAnalyzer
 
-It is a parsing tool based on python for C/C++ to construct code property graph, which is the python version of [CodeParser](https://github.com/for-just-we/CodeParser), most of functions of CppCodeAnalyzer are similar to Joern, the differences are that:
+It is a parsing tool based on python for C/C++ to construct code property graph, which is the python version of [CppCodeAnalyzerJava](https://github.com/for-just-we/CppCodeAnalyzerJava), most of functions of CppCodeAnalyzer are similar to Joern, the differences are that:
 
 - The grammar we utilize here is from the repo of [grammars-v4](https://github.com/antlr/grammars-v4) Antlr official, which means the input of module ast (Antlr AST) is quite different from Joern, but the output customized AST is the same, so the parsing module in ast package is different from Joern.
 
