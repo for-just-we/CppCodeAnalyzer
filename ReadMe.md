@@ -89,7 +89,9 @@ Also, our tool is much more slower than Joern, normally parsing a file in SARD d
 
 
 
+# configuration
 
+[CalleeInfos.json](https://github.com/for-just-we/CppCodeAnalyzer/blob/master/resources/calleeInfos.json) stores APIs which define or use variable of pointer type, you can use `json` package to load these callee infos and set [ASTDefUseAnalyzer](https://github.com/for-just-we/CppCodeAnalyzer/blob/master/mainTool/udg/astAnalyzers.py).calleeInfos according to your own preference when analysing use-def information of each code line.
 
 
 
