@@ -1,7 +1,5 @@
 from mainTool.ast.statements.jumps import ReturnStatement
-from mainTool.utils.graphUtils import Edge
-from mainTool.CPG import CodeEdge
-from extraTools.vuldetect.utils.sinkPoint import SyVCPoint, CallExprTool, XFGPoint
+from extraTools.vuldetect.utils.sinkPoint import CallExprTool, XFGPoint
 from extraTools.vuldetect.utils.symbolized import SymbolizingTool
 from mainTool.CPG import *
 from typing import List, Set, Tuple
@@ -230,7 +228,7 @@ class XFGSliceTool(object):
                 otherCpg: CPG = self.funcName2cpg[callTool.functionName]
                 # 以前面一行代码的return语句为起点反向遍历
                 assert isinstance(otherCpg.statements[-1], ReturnStatement)
-                newStartIdxs: List[int] = [len(otherCpg.statements)]
+                newStartIdxs: List[int] = [len(otherCpg.statements) - 1]
                 self.generateBackwardSlice(otherCpg.name, newStartIdxs, slices, functionChain, sliceLines,
                                            cdEdges, ddEdges, coveredFileIds)
 
@@ -280,7 +278,7 @@ class XFGSliceTool(object):
             callTool.judgeCall(cpg.statements[id])
             if callTool.functionName is not None and callTool.functionName in self.funcName2cpg.keys():
                 otherCpg: CPG = self.funcName2cpg[callTool.functionName]
-                # 以前面一行代码的return语句为起点反向遍历
+                # 以前面一行代码的parameter语句为起点反向遍历
                 assert callTool.argNum > 0
                 newStartIdxs: List[int] = list(range(callTool.argNum))
                 self.generateForwardSlice(otherCpg.name, newStartIdxs, slices, functionChain, sliceLines,

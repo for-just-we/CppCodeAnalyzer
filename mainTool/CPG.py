@@ -23,7 +23,7 @@ class CodeEdge(Edge[int]):
             return f"{self.source} ---- {self.destination}"
         return f"{self.source} --[{self.property}]-- {self.destination}"
 
-    def toJson(self):
+    def toJson(self) -> List:
         datas = [self.source, self.destination]
         if self.property is not None:
             datas.append(self.property)

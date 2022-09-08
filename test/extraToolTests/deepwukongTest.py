@@ -32,10 +32,13 @@ def test():
     systemDefinedVars: Set[str] = { "argc", "argv", "stdin", "stdout", "cin", "cout" }
 
     calleeInfos = initialCalleeInfos(calleeInfs)
+    astAnalyzer: ASTDefUseAnalyzer = ASTDefUseAnalyzer()
+    astAnalyzer.calleeInfos = calleeInfos
     converter: CFGToUDGConverter = CFGToUDGConverter()
+    converter.astAnalyzer = astAnalyzer
     defUseConverter: CFGAndUDGToDefUseCFG = CFGAndUDGToDefUseCFG()
     ddgCreator: DDGCreator = DDGCreator()
-    cpgs: List[CPG] = fileParse(fileName, calleeInfos, converter, defUseConverter, ddgCreator)
+    cpgs: List[CPG] = fileParse(fileName, converter, defUseConverter, ddgCreator)
     for cpg in cpgs:
         cpg.file = fileName
     symbolizingTool: SymbolizingTool = SymbolizingTool(systemDefinedVars, systemDefinedFuncs)
@@ -100,10 +103,13 @@ def testGenerateSlices():
     sensitive_apis: Set[str] = { "malloc", "memset" }
 
     calleeInfos = initialCalleeInfos(calleeInfs)
+    astAnalyzer: ASTDefUseAnalyzer = ASTDefUseAnalyzer()
+    astAnalyzer.calleeInfos = calleeInfos
     converter: CFGToUDGConverter = CFGToUDGConverter()
+    converter.astAnalyzer = astAnalyzer
     defUseConverter: CFGAndUDGToDefUseCFG = CFGAndUDGToDefUseCFG()
     ddgCreator: DDGCreator = DDGCreator()
-    cpgsCommon: List[CPG] = fileParse(file1, calleeInfos, converter, defUseConverter, ddgCreator) # print et al
+    cpgsCommon: List[CPG] = fileParse(file1, converter, defUseConverter, ddgCreator) # print et al
     for cpg in cpgsCommon:
         cpg.joinSlice = False
         cpg.file = file1
@@ -113,7 +119,7 @@ def testGenerateSlices():
     #     cpg.file = file2
     cpgMainss: List[CPG] = list()
     for testfile in testfiles:
-        cpgMains: List[CPG] = fileParse(testfile, calleeInfos, converter, defUseConverter, ddgCreator)
+        cpgMains: List[CPG] = fileParse(testfile,  converter, defUseConverter, ddgCreator)
         for cpg in cpgMains:
             cpg.file = testfile
         cpgMainss.extend(cpgMains)

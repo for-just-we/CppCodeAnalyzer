@@ -5,7 +5,7 @@ from typing import Set, Dict
 class VariableEnvironment(object):
     def __init__(self, astProvider: ASTProvider):
         self.astProvider: ASTProvider = astProvider
-        # 交由父节点处理的token
+        # 自己处理的token
         self.handledSymbols: Set[str] = set()
         # 交由父节点处理的token
         self.upStreamSymbols: Set[str] = set()

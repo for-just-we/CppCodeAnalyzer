@@ -60,6 +60,9 @@ class FunctionContentBuilder(CPP14Listener):
         self.curCompleteType: str = None
         self.curVarNameId: Identifier = None # 标识当前变量名，处理IdentifierDeclType时用
 
+        self.countArrayDecl: int = 0
+        self.arrayIdentifierCount: int = 0
+
         self.pastTheTypeId: bool = False # 用来解析cast type时用，为true表示现在正在解析castTarget
         self.nesting: NestingReconstructor = NestingReconstructor(self.stack)
 
@@ -305,6 +308,12 @@ class FunctionContentBuilder(CPP14Listener):
     # 处理数组定义类型，char source[100];，对于这种变量其类型为 char *
     def enterArrayDecl(self, ctx: CPP14Parser.ArrayDeclContext):
         self.curCompleteType += " *"
+        self.countArrayDecl += 1
+
+    def exitArrayDecl(self, ctx:CPP14Parser.ArrayDeclContext):
+        self.countArrayDecl -= 1
+        if self.countArrayDecl == 0:
+            self.arrayIdentifierCount = 0
 
     # 变量定义语句可能伴随着赋值，包括 int a = 10, b{10}, c(100);
     # 对应 int a = 10;
@@ -690,6 +699,11 @@ class FunctionContentBuilder(CPP14Listener):
             expr.codeStr = node_impl.getText()
             parent.addChild(expr)
             # 如果当前Identifier在变量定义语句中
+            if self.countArrayDecl > 0:
+                self.arrayIdentifierCount += 1
+
+            if self.countArrayDecl > 0 and self.arrayIdentifierCount > 1:
+                return
             if len(self.idType) > 0 and self.idType[-1] == declarator:
                 self.curVarNameId = expr
 
@@ -791,6 +805,7 @@ class FunctionNameParamBuilder(CPP14Listener):
     def enterArrayDecl(self, ctx:CPP14Parser.ArrayDeclContext):
         if isinstance(self.stack[-1], Parameter):
             self.curParamCompleteType += " *"
+
 
     # 参数列表
     def enterParametersandqualifiers(self, ctx:CPP14Parser.ParametersandqualifiersContext):
