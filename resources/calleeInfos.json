@@ -1,6 +1,6 @@
 {
   "ArgDefs": {
-      "fgets": [2],
+      "fgets": [0],
       "gets": [0],
       "fread": [0],
       "snprintf": [0],
@@ -44,7 +44,8 @@
       "wmemmove": [0],
       "wmemset": [0],
 
-      "wcsftime": [3]
+      "wcsftime": [3],
+      "recv": [1]
   },
   "ArgUses": {
       "fopen": [0, 1],
@@ -59,7 +60,7 @@
       "scanf": [0],
       "fscanf": [0, 1],
       "fgetc": [0],
-      "fgets": [0],
+      "fgets": [2],
       "fputc": [1],
       "getc": [0],
       "puts": [0],
@@ -81,6 +82,7 @@
       "atol": [0],
       "strtod": [0, 1],
       "strtol": [0, 1],
+      "strtoul": [0, 1],
       "realloc": [0],
       "getenv": [0],
 

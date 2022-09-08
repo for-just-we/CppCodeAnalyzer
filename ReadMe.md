@@ -1,6 +1,6 @@
 # About CppCodeAnalyzer
 
-It is a parsing tool based on python for C/C++ to construct code property graph, which is the python version of [CodeParser](https://github.com/for-just-we/CodeParser), most of functions of CppCodeAnalyzer are similar to Joern, the differences are that:
+It is a parsing tool based on python for C/C++ to construct code property graph, which is the python version of [CppCodeAnalyzerJava](https://github.com/for-just-we/CppCodeAnalyzerJava), most of functions of CppCodeAnalyzer are similar to Joern, the differences are that:
 
 - The grammar we utilize here is from the repo of [grammars-v4](https://github.com/antlr/grammars-v4) Antlr official, which means the input of module ast (Antlr AST) is quite different from Joern, but the output customized AST is the same, so the parsing module in ast package is different from Joern.
 
@@ -89,7 +89,9 @@ Also, our tool is much more slower than Joern, normally parsing a file in SARD d
 
 
 
+# configuration
 
+[CalleeInfos.json](https://github.com/for-just-we/CppCodeAnalyzer/blob/master/resources/calleeInfos.json) stores APIs which define or use variable of pointer type, you can use `json` package to load these callee infos and set [ASTDefUseAnalyzer](https://github.com/for-just-we/CppCodeAnalyzer/blob/master/mainTool/udg/astAnalyzers.py).calleeInfos according to your own preference when analysing use-def information of each code line.
 
 
 
