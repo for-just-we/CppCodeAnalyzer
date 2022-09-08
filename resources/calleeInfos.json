@@ -1,6 +1,6 @@
 {
   "ArgDefs": {
-      "fgets": [2],
+      "fgets": [0],
       "gets": [0],
       "fread": [0],
       "snprintf": [0],
@@ -60,7 +60,7 @@
       "scanf": [0],
       "fscanf": [0, 1],
       "fgetc": [0],
-      "fgets": [0],
+      "fgets": [2],
       "fputc": [1],
       "getc": [0],
       "puts": [0],
